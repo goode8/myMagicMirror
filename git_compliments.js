@@ -1,6 +1,7 @@
 /* Magic Mirror
  * Module: Compliments
 ommited */
+//I didn't like it calling me sexy, so I edited the file at MagicMirror/modules/default/compliments
                 compliments: {
                         anytime: ["Hey there smartypants!"],
                         morning: ["Good morning, goode8!", "Enjoy your day!", "How is it, being sought after?"],
