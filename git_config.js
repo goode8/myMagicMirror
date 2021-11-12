@@ -41,7 +41,9 @@
                         module: "clock",
                         position: "top_left"
                 },
-                {
+                {//trying to us my google calendar. this says loading for a while, then "no upcoming events" 
+		//i've read the blogs. I've downloaded the files, there's stuff in it. 
+
                         module: "calendar",
                         header: "Something or Nothing",
                         position: "top_right",
