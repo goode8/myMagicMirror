@@ -5,7 +5,7 @@
 fade: false,
 
 //////////////////////////////////////////////////
-Another change:
+//Another change:
 //path: /MagicMirror/modules/default/weather/
 //filename: weather.js
 
