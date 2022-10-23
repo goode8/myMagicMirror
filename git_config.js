@@ -1,147 +1,143 @@
-/* Magic Mirror Config Altered
+/* MagicMirror² Config Sample
  *
  * By Michael Teeuw https://michaelteeuw.nl
  * MIT Licensed.
  *
  * For more information on how you can configure this file
- * See https://github.com/MichMich/MagicMirror#configuration
- *
+ * see https://docs.magicmirror.builders/configuration/introduction.html
+ * and https://docs.magicmirror.builders/modules/configuration.html
  */
- 
- /*Customizations by goode8
- main parts ommitted. keeping in just the modules 
- */
+let config = {
+	address: "localhost", 	// Address to listen on, can be:
+							// - "localhost", "127.0.0.1", "::1" to listen on loopback interface
+							// - another specific IPv4/6 to listen on a specific interface
+							// - "0.0.0.0", "::" to listen on any interface
+							// Default, when address config is left out or empty, is "localhost"
+	port: 8080,
+	basePath: "/", 	// The URL path where MagicMirror² is hosted. If you are using a Reverse proxy
+					// you must set the sub path here. basePath must end with a /
+	ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1"], 	// Set [] to allow all IP addresses
+															// or add a specific IPv4 of 192.168.1.5 :
+															// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
+															// or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
+															// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
 
-        modules: [
-                {
-                        module: "alert",
-                },
-                {
-                        module: "updatenotification",
-                        position: "top_bar"
-                },
+	useHttps: false, 		// Support HTTPS or not, default "false" will use HTTP
+	httpsPrivateKey: "", 	// HTTPS private key path, only require when useHttps is true
+	httpsCertificate: "", 	// HTTPS Certificate path, only require when useHttps is true
 
-                // Base WallberryTheme adds new font, styles, and a rotating background image pulled from Unsplash.com
-				//i might try the other modules available. 
-                {//i love the photos
-				//i'd really like a photo that follows the weather, sun, and moon, but not enough time. 
-                        module: "WallberryTheme",
-                        position: "fullscreen_below", // Required Position
-                        config: {
-                        unsplashAccessKey: "omitted", // REQUIRED
-                        //collections: "2589108", // optional - leave empty for a random photo
-                        //addBackgroundFade:"",
-                        autoDimOn:true,
-                        updateInterval:"60000"
-                        //brightImageOpacity:"",
-                        //orientation:"landscape"
-                }
-                },
-                {
-                        module: "clock",
-                        position: "top_left"
-                },
-                {//trying to us my google calendar. this says loading for a while, then "no upcoming events" 
-		//i've read the blogs. I've downloaded the files, there's stuff in it. 
+	language: "en",
+	locale: "en-US",
+	logLevel: ["INFO", "LOG", "WARN", "ERROR"], // Add "DEBUG" for even more logging
+	timeFormat: 24,
+	units: "imperial",
+	// serverOnly:  true/false/"local" ,
+	// local for armv6l processors, default
+	//   starts serveronly and then starts chrome browser
+	// false, default for all NON-armv6l devices
+	// true, force serveronly mode, because you want to.. no UI on this device
 
-                        module: "calendar",
-                        header: "Something or Nothing",
-                        position: "top_right",
-                        config: {
-                                colored:true,
-                                calendars: [
-                                        {
-                                                symbol: "calendar-alt",
-                                                url: "webcal://www.calendarlabs.com/ical-calendar/ics/76/US_Holidays.ics",
-												//url: "https://calendar.google.com/calendar/ical/nameomitted%40gmail.com/private-omitted/basic.ics",
-												//it's fun:
-                                                color:"Violet",
-                                                maximumNumberOfDays:90, //i've tried a few values here...
-                                        }
-                                ]
-
-                        }
-                },
-
-                {
-                        module: "compliments",
-                        position: "top_bar"
-                },
-
-                {//i like using these two together. I get now and the week. it works for me.
-                        module: "weather",
-                        position: "top_right",
-                        header:"Current Weather",
-                        config: {
-                                weatherProvider:"openweathermap",
-                                type:"current",
-                                location:"omitted,
-                                locationID: "omitted",
-                                units:"imperial",
-                                tempUnits:"imperial",
-                                degreeLabel:true,
-                                showFeelsLike:false,
-                                showSun:false,
-                                apiKey: "omitted"
-                                }
-                },
-
-                {
-                        module: "weather",
-                        position: "top_right",
-                        header:"Forecast",
-                        config: {
-                                weatherProvider:"openweathermap",
-                                type:"forecast",
-                                weatherEndpoint:"/forecast",
-                                location:"omitted",
-                                locationID: "omitted",
-                                units:"imperial",
-                                tempUnits:"imperial",
-                                degreeLabel:true,
-                                apiKey: "omitted"
-                                }
-
-                },
-
-
-                { //I've disabled this. too busy for me. I like the idea.
-					//also doesn't look great on the photo background.
-                          //disabled:true,
-                          module: "MMM-AVStock",
-                          position: "top_left",
-                          config: {
-                                apiKey : "omitted",
-                                mode: "table",
-                                //mode: "ticker",
-                                symbols : ["AAPL", "LYFT", "GOOGL", "K"],
-                                alias: ["Apple", "Lyft", "Google", "Kellogg"],
-                                showChart:false,
-                                showVolume:false,
-                                showPurchasePrices:false,
-                                showPerformance2Purchase:false
-                                  }
-                },
-
-                {//changed from NYTimes
-                        module: "newsfeed",
-                        position: "bottom_right",
-                        config: {
-                                feeds: [
-                                        {
-                                                title: "NPR",
-                                                url: "https://feeds.npr.org/1001                                                                                                             /rss.xml"
-                                        }
-                                        ],
-                                showSourceTitle: true,
-                                showPublishDate: true,
-                                broadcastNewsFeeds: true,
-                                broadcastNewsUpdates: true
-                        }
-                },
-        ]
+	modules: [
+		{
+			//https://github.com/mykle1/MMM-EasyBack
+			module: 'MMM-EasyBack',
+			position: 'fullscreen_below',
+			config: {
+					//bgName: "Example.jpg",   // "Example.jpg", the file name of your background image (case sensitive)
+					bgName: "461204-space-NASA-Hubble-Great_Orion_Nebula.jpg",
+					//  found here: https://hdwallpaperim.com/wp-content/uploads/2017/08/25/461204-space-NASA-Hubble-Great_Orion_Nebula.jpg
+					videoName: "",       // "baboon.mp4",         // file name of your local video
+					youTubeID: "", //"SkeNMoDlHUU", // "So3vH9FY2H4", // ID from any YouTube video. ID comes after the = sign of YouTube url
+					height: "1080px",    // your display's resolution in pixels. Enter in config.js
+					width: "1920px",     // your display's resolution in pixels. Enter in config.js
+					}
+		},
+		{
+			module: "alert",
+		},
+		{
+			module: "updatenotification",
+			position: "top_bar"
+		},
+		{
+			module: "clock",
+			position: "top_left"
+		},
+		{
+			module: "calendar",
+			//header: "US Holidays",
+			header: "Holidays",
+			position: "top_left",
+			dateFormat: "ddd MM/DD",
+			timeFormat: "absolute",
+			//displaySymbol: "false",
+			//fade: "false",
+			//fadePoint: "10",
+			config: {
+				calendars: [
+					{
+						symbol: "calendar",
+						//url: "webcal://www.calendarlabs.com/ical-calendar/ics/76/US_Holidays.ics"
+						url: $CAL_URL,
+						auth: {
+							user:$CAL_AUTH_USER,
+							pass:$CAL_AUTH_PASS,
+							method: "basic", 
+						}, 
+					}
+				]
+			}
+		},
+		{
+			module: "compliments",
+			position: "lower_third"
+			//Changed List in 
+		},
+		{
+			module: "weather",
+			position: "top_right",
+			//fade: "false",
+			//fadePoint: "-1",
+			config: {
+				weatherProvider: "openweathermap",
+				type: "current",
+				location: "New York",
+				locationID: "5128581", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+				apiKey: "YOUR_OPENWEATHER_API_KEY"
+			}
+		},
+		{
+			module: "weather",
+			position: "top_right",
+			header: "Weather Forecast",
+			//fade: "false",
+			//fadePoint: "10",
+			config: {
+				weatherProvider: "openweathermap",
+				type: "forecast",
+				location: "New York",
+				locationID: "5128581", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+				apiKey: "YOUR_OPENWEATHER_API_KEY"
+			}
+		},
+		{
+			module: "newsfeed",
+			position: "bottom_bar",
+			config: {
+				feeds: [
+					{
+						title: "New York Times",
+						url: "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+					}
+				],
+				showSourceTitle: true,
+				showPublishDate: true,
+				broadcastNewsFeeds: true,
+				broadcastNewsUpdates: true
+			}
+		},
+	]
 };
 
 /*************** DO NOT EDIT THE LINE BELOW ***************/
 if (typeof module !== "undefined") {module.exports = config;}
-pi@raspberrypi:~/MagicMirror/config $ ls
