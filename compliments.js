@@ -1,4 +1,5 @@
 //path: /MagicMirror/modules/default/compliments
+
 //change:
 defaults: {
 		compliments: {
