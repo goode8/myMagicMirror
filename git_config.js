@@ -1,6 +1,6 @@
-//path: /MagicMirror/config/config.js
+//path: /MagicMirror/config/config.js  
 
-/* MagicMirror² Config Sample
+/* MagicMirror² Config Sample,
  *
  * By Michael Teeuw https://michaelteeuw.nl
  * MIT Licensed.
