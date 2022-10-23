@@ -9,5 +9,6 @@ I wanted only white text with no fade to show up over the picture for the calend
 
 I found a stock ticker and that was cool, but way too distracting.
 
-Next, setup .env file for private info. 
 Later, I'd like to use an autoloader on bootup.
+
+I gave up on the .env replacing passwords.
